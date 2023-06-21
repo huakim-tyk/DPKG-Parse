@@ -7,8 +7,14 @@ Files: *
 Copyright: 2005, Adam Jacob <holoway@cpan.org>
 License: Artistic or GPL-1+
 
+Copyright: 2023, huakim-tyk <zuhhaga@gmail.com>
+License: Artistic or GPL-1+
+
 Files: debian/*
 Copyright: 2015, Andy Beverley <andy@andybev.com>
+License: Artistic or GPL-1+
+
+Copyright: 2023, huakim-tyk <zuhhaga@gmail.com>
 License: Artistic or GPL-1+
 
 License: Artistic

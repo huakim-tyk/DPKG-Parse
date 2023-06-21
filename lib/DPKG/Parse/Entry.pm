@@ -99,6 +99,7 @@ DPKG::Parse::Entry->mk_accessors(qw(
     task
     tag
     url
+    id
     version
     original_maintainer
     homepage
@@ -161,6 +162,7 @@ The accessors are:
     status
     task
     tag
+    id
     url
     version
 
@@ -254,6 +256,16 @@ sub parse {
             die "line ${line_num}: I have no idea what to do with '${line}'!\n";
         }
     }
+    
+    my $id = $pkg->{'package'};
+    my $multi = $pkg->{'multi_arch'}; 
+    if (defined $multi && defined $id && $multi eq 'same'){
+        my $arch = $pkg->{'architecture'};
+        if (defined $arch){
+            $id .= ':' . $arch;
+        }
+    }
+    $pkg->{'id'} = $id;
 }
 
 =back

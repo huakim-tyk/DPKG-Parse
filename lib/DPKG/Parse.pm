@@ -114,12 +114,19 @@ sub parse_package_format {
     my $entry = '';
     my $line_num = -1;
     my $entry_line = 0;
+    my $entryhash = $pkg->{'entryhash'};
+    my $entryarray = $pkg->{'entryarray'};
     STATUSLINE: while (my $line = <STATUS>) {
         ++$line_num;
         if ($line =~ /^\n$/) {
-            my $dpkg_entry = DPKG::Parse::Entry->new('data' => $entry, debug => $pkg->debug, line_num => $entry_line);
-            push(@{$pkg->{'entryarray'}}, $dpkg_entry);
-            $pkg->{'entryhash'}->{$dpkg_entry->package} = $dpkg_entry;
+            my $dpkg_entry = DPKG::Parse::Entry->new(
+                'data' => $entry,
+                debug => $pkg->debug, 
+                line_num => $entry_line);
+                
+                
+            push(@{$entryarray}, $dpkg_entry);
+            $entryhash->{$dpkg_entry->{'id'}} = $dpkg_entry;
             $entry = '';
             $entry_line = $line_num + 1;
             next STATUSLINE;

@@ -75,7 +75,7 @@ sub parse {
     my $installed;
     foreach my $entry (@{$pkg->entryarray}) {
         if ($entry->status =~ /^install ok installed$/) {
-           $installed->{$entry->package} = $entry;
+           $installed->{$entry->{'id'}} = $entry;
         }
     }
     $pkg->installed($installed);
