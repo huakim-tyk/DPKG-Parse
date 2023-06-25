@@ -83,7 +83,7 @@ sub _cat_lists
 {
     my ( $self, $callback ) = @_;
     for ( @{$self->entryarray()} ) {
-        my $pkg = $_->{'id'} ;
+        my $pkg = $_;
         my $list = $_->list;
     #    print (Dumper($list));
         for my $l ( @{$list} ) {
