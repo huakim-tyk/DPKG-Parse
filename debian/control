@@ -1,19 +1,17 @@
 Source: libdpkg-parse-perl
-Maintainer: huakim-tyk <zuhhaga@gmail.com>
+Maintainer: lenovo <lenovo@>
 Section: perl
-Testsuite: autopkgtest-pkg-perl
 Priority: optional
-Build-Depends: debhelper-compat (= 12),
-               libmodule-build-tiny-perl
-Build-Depends-Indep: perl,
-                     libclass-accessor-perl,
-                     libclass-c3-perl,
-                     libparams-validate-perl,
-                     libset-scalar-perl
-Standards-Version: 4.1.3
-Vcs-Browser: https://github.com/huakim-tyk/Dpkg-Parse-Perl
-Vcs-Git: https://github.com/huakim-tyk/Dpkg-Parse-Perl.git
+Build-Depends: debhelper-compat (= 13)
+Build-Depends-Indep: libclass-accessor-perl <!nocheck>,
+                     libclass-c3-perl <!nocheck>,
+                     libmodule-build-tiny-perl,
+                     libparams-validate-perl <!nocheck>,
+                     libtest-simple-perl <!nocheck>,
+                     perl
+Standards-Version: 4.6.2
 Homepage: https://metacpan.org/release/DPKG-Parse
+Rules-Requires-Root: no
 
 Package: libdpkg-parse-perl
 Architecture: all
@@ -21,14 +19,11 @@ Depends: ${misc:Depends},
          ${perl:Depends},
          libclass-accessor-perl,
          libclass-c3-perl,
-         libparams-validate-perl,
-         libset-scalar-perl
-Description: module to parse various dpkg files into Perl Objects
+         libparams-validate-perl
+Description: Parse various dpkg files into Perl Objects
  DPKG::Parse contains utilities to parse the various files created by dpkg and
  turn them into helpful Perl objects. Current files understood by various
  DPKG::Parse modules:
- .
- /var/lib/dpkg/info - DPKG::Parse::Info
  .
  /var/lib/dpkg/status - DPKG::Parse::Status
  .
@@ -38,3 +33,5 @@ Description: module to parse various dpkg files into Perl Objects
  .
  See each module's documentation for particulars - You should not be calling
  DPKG::Parse directly.
+ .
+ This description was automagically extracted from the module by dh-make-perl.

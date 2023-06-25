@@ -1,42 +1,5 @@
-libdpkg-parse-perl (0.03-3) unstable; urgency=medium
-
-  [ Alex Muntada ]
-  * Remove inactive pkg-perl members from Uploaders.
-
-  [ Damyan Ivanov ]
-  * declare conformance with Policy 4.1.3 (no changes needed)
-
-  [ Salvatore Bonaccorso ]
-  * Update Vcs-* headers for switch to salsa.debian.org
-
-  [ Debian Janitor ]
-  * Bump debhelper from old 9 to 12.
-  * Set debhelper-compat version in Build-Depends.
-  * Remove obsolete fields Contact, Name from debian/upstream/metadata
-    (already present in machine-readable debian/copyright).
-
-  [ gregor herrmann ]
-  * debian/watch: use uscan version 4.
-
- -- Jelmer Vernooĳ <jelmer@debian.org>  Mon, 13 Jun 2022 21:15:39 +0100
-
-libdpkg-parse-perl (0.03-2) unstable; urgency=medium
-
-  * Team upload.
-
-  [ Salvatore Bonaccorso ]
-  * debian/control: Use HTTPS transport protocol for Vcs-Git URI
-
-  [ gregor herrmann ]
-  * debian/copyright: change Copyright-Format 1.0 URL to HTTPS.
-  * Add patch to avoid warnings about uninitialized value in Perl 5.26.
-  * Declare compliance with Debian Policy 4.0.1.
-
- -- gregor herrmann <gregoa@debian.org>  Tue, 08 Aug 2017 22:18:49 -0400
-
 libdpkg-parse-perl (0.03-1) unstable; urgency=low
 
-  * Team upload
-  * Initial Release. Closes: #800093 (ITP)
+  * Initial release.
 
- -- Damyan Ivanov <dmn@debian.org>  Sat, 26 Sep 2015 18:20:36 +0000
+ -- lenovo <lenovo@>  Sun, 25 Jun 2023 18:31:37 +0300

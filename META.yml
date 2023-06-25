@@ -26,6 +26,12 @@ provides:
   DPKG::Parse:
     file: lib/DPKG/Parse.pm
     version: '0.03'
+  DPKG::Parse::Info:
+    file: lib/DPKG/Parse/Info.pm
+    version: '0.01'
+  DPKG::Parse::InfoEntry:
+    file: lib/DPKG/Parse/InfoEntry.pm
+    version: '0.01'
   DPKG::Parse::Available:
     file: lib/DPKG/Parse/Available.pm
     version: '0.03'
@@ -43,6 +49,7 @@ requires:
   Class::Accessor: '0'
   Class::C3: '0'
   Params::Validate: '0'
+  File::Spec: '0'
   base: '0'
   perl: '5.006'
   strict: '0'

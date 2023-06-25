@@ -6,7 +6,6 @@ use base qw(DPKG::Parse::Status);
 use File::Spec;
 use strict;
 use warnings;
-use Set::Scalar;
 
 DPKG::Parse::Info->mk_accessors(qw(infopath));
 
@@ -69,7 +68,7 @@ sub new {
 =item new ( I<options> )
 
 
-=item scan_full_path ( I<path> )
+=item scan_contains_paths ( I<path> )
 
 Scans dpkg file lists for files, whose full path is equal to I<path>. Use when
 you have the full path of the file you want, like C</usr/bin/perl>.
@@ -78,41 +77,67 @@ Returns a (possibly empty) list of packages containing I<path>.
 
 =cut
 
-
-sub _cat_lists
+sub scan
 {
+    
+    # this function will scan for packages that meet condition
     my ( $self, $callback ) = @_;
+    my @array;
     for ( @{$self->entryarray()} ) {
         my $pkg = $_;
-        my $list = $_->list;
-    #    print (Dumper($list));
-        for my $l ( @{$list} ) {
-            &$callback( $pkg, $l );
-        }
+        # check callback output, if true, then add package to return list
+        if (&$callback( $pkg )){
+            push @array, $pkg;
+        };
     }
+    # return sorted array
+    return sort { $a->{'id'} cmp $b->{'id'} } @array;
 }
 
 
-sub scan_full_paths
+sub scan_contains_paths
 {
+    # this function will scan for packages that contains defined files
     my ( $class, $path ) = @_;
-
-    if (! $path->isa('Set::Scalar')){
-        if (ref($path) eq 'ARRAY'){
-            my $path = Set::Scalar->new(@$path);
-        } else {
-            my $path = Set::Scalar->new($path);
-        }
+    
+    my $map;
+    
+    if ( $path->isa('Set::Scalar')){
+        $map = $path->{'elements'};
+        goto lop;
     }
-
-    my %found;
-    $class->_cat_lists(
+    
+    $map = ref($path);
+    
+    if ($map eq 'ARRAY'){
+        $map = {};
+        for (@$path){
+            $map->{$_} = 1;
+        }
+        goto lop;
+    }
+    
+    if ($map eq 'HASH'){
+        $map = $path;
+        goto lop;
+    }
+    
+    $map = {"$path"};
+    
+    lop:
+    # this is an list of found files 
+    return $class->scan(
         sub {
-            $found{ $_[0] } = 1 if $path->has($_[1]);
+            my $pkg = shift;
+            
+            for (@{$pkg->list()}){
+                if ($map->{$_}){
+                    return 1;
+                }
+            }
+            return 0;
         }
     );
-
-    return sort keys %found;
 }
 
 
