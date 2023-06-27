@@ -100,14 +100,7 @@ sub scan_contains_paths
     # this function will scan for packages that contains defined files
     my ( $class, $path ) = @_;
     
-    my $map;
-    
-    if ( $path->isa('Set::Scalar')){
-        $map = $path->{'elements'};
-        goto lop;
-    }
-    
-    $map = ref($path);
+    my $map = ref($path);
     
     if ($map eq 'ARRAY'){
         $map = {};

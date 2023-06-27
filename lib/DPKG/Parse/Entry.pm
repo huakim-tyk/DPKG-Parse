@@ -193,6 +193,17 @@ sub new {
     return $ref;
 }
 
+
+use overload  q("") => sub { 
+    my $self = shift; 
+    return $self->{'id'};
+};
+
+sub stringify {
+    my $self = shift;
+    return $self->{'id'};
+}
+
 =item parse('data' => $data);
 
 Does the actual parsing of the Package block given to new().  Probably
